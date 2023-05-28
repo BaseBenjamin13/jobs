@@ -16,6 +16,10 @@ function JobDetails() {
         job_id: params.id
     });
 
+    const [refreshing, setRefreshing] = useState(false);
+
+    const onRefresh = () => {}
+
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
             <Stack.Screen
@@ -38,9 +42,42 @@ function JobDetails() {
                     ),
                     headerTitle: ''
                 }}
-            >
+            />
 
-            </Stack.Screen>
+            <>
+                <ScrollView 
+                    showsVerticalScrollIndicator={false}
+                    refreshControl={
+                        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                    }
+                >
+
+                    {isLoading ? (
+                        <ActivityIndicator size="large" color="#0442BF" />
+                    ) : error ? (
+                        <Text>Something went wrong</Text>
+                    ) : data.length === 0 ? (
+                        <Text>No Data</Text>
+                    ) : (
+                        <View style={{ padding: SIZES.medium, paddingBottom: 100}}>
+                            <Company 
+                                companyLogo={data[0].employer_logo}
+                                jobTitle={data[0].job_title}
+                                companyName={data[0].employer_name}
+                                Location={data[0].job_country}
+                            />
+
+                            <JobTabs 
+
+                            />
+
+                        </View>
+                    )
+                    }
+
+                </ScrollView>
+            </>
+
         </SafeAreaView>
     )
 }
