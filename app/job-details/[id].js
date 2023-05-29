@@ -8,6 +8,8 @@ import { Company, JobAbout, JobFooter, JobTabs, ScreenHeaderBtn, Specifics }
 import { COLORS, icons, SIZES } from '../../constants';
 import useFetch from '../../hook/useFetch';
 
+const tabs = ["About", "Qualifications", "Responsibilites"];
+
 function JobDetails() {
     const params = useSearchParams();
     const router = useRouter();
@@ -17,6 +19,7 @@ function JobDetails() {
     });
 
     const [refreshing, setRefreshing] = useState(false);
+    const [activeTab, setActiveTab] = useState(tabs[0]);
 
     const onRefresh = () => {}
 
@@ -68,7 +71,9 @@ function JobDetails() {
                             />
 
                             <JobTabs 
-
+                                tabs={tabs}
+                                activeTab={activeTab}
+                                setActiveTab={setActiveTab}
                             />
 
                         </View>
