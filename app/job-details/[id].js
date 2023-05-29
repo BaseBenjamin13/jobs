@@ -8,7 +8,7 @@ import { Company, JobAbout, JobFooter, JobTabs, ScreenHeaderBtn, Specifics }
 import { COLORS, icons, SIZES } from '../../constants';
 import useFetch from '../../hook/useFetch';
 
-const tabs = ["About", "Qualifications", "Responsibilites"];
+const tabs = ["About", "Qualifications", "Responsibilities"];
 
 function JobDetails() {
     const params = useSearchParams();
@@ -34,10 +34,10 @@ function JobDetails() {
                 return <JobAbout 
                     info={data[0].job_description ?? "No data provided"}
                 />
-            case "Responsibilites":
+            case "Responsibilities":
                 return <Specifics
-                    title="Responsibilites"
-                    points={data[0].job_highlights?.Qualifications ?? ['N/A']}
+                    title="Responsibilities"
+                    points={data[0].job_highlights?.Responsibilities ?? ['N/A']}
                 />
             default:
                 break;
